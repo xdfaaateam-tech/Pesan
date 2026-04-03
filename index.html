@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Lailaa 🌈</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3, #6a82fb);
+  background-size: 300% 300%;
+  animation: bgMove 15s ease infinite;
+}
+
+/* background glow circle */
+body::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(255,255,255,0.2);
+  filter: blur(100px);
+  top: 10%;
+  left: 20%;
+  animation: float 10s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(40px); }
+}
+
+@keyframes bgMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.card {
+  width: 90%;
+  max-width: 400px;
+  padding: 28px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+  text-align: center;
+  animation: fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+h1 {
+  font-size: 1.8em;
+}
+
+.name {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  text-shadow: 0 0 12px pink;
+}
+
+#text {
+  min-height: 85px;
+  font-size: 0.95em;
+  line-height: 1.6em;
+  margin-bottom: 18px;
+}
+
+/* button premium */
+button {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  background: white;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* ripple */
+button::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.4s;
+}
+
+button:active::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* input modern */
+input {
+  margin-top: 10px;
+  padding: 8px;
+  width: 80%;
+  border: none;
+  border-bottom: 2px solid white;
+  background: transparent;
+  color: white;
+  text-align: center;
+  outline: none;
+}
+
+.small {
+  font-size: 0.7em;
+  opacity: 0.7;
+}
+
+.hidden {
+  display: none;
+}
+
+/* confetti elegant */
+.confetti {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: -10px;
+  opacity: 0.6;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Selamat Ulang Tahun 🎉</h1>
+  <div class="name">Lailaa 🌈</div>
+
+  <div id="text"></div>
+
+  <button onclick="start()">Mulai</button>
+
+  <div id="secretBox" class="hidden">
+    <p class="small">Clue: kapan kita kenal 👀</p>
+    <input id="password" placeholder="ingat baik-baik...">
+    <br><br>
+    <button onclick="checkPassword()">Buka</button>
+  </div>
+
+  <div id="secretMessage" class="hidden">
+    <p style="margin-top:15px; line-height:1.6em;">
+      Makasih ya sudah hadir di hidup ini 🌈<br><br>
+      Dari sekian banyak hari yang lewat,  
+      ada satu hari yang selalu keinget…  
+      hari dimana semuanya mulai terasa berbeda.<br><br>
+
+      Kamu itu sederhana, tapi berarti.  
+      Gak selalu harus sempurna,  
+      tapi selalu cukup untuk bikin hari jadi lebih baik.<br><br>
+
+      Semoga di umur kamu sekarang,  
+      hal-hal baik makin deket ke kamu,  
+      dan hal-hal berat pelan-pelan menjauh 💖
+    </p>
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-sweet.mp3">
+</audio>
+
+<script>
+const msg = `Hai Lailaa 🌈
+
+Hari ini bukan cuma tentang bertambahnya umur,
+tapi tentang semua hal baik yang sudah kamu lewati.
+
+Semoga hari kamu ringan,
+senyummu lebih sering,
+dan langkahmu selalu ditemani hal-hal baik.
+
+Stay being you, ya ✨`;
+
+let i = 0;
+
+function start() {
+  document.getElementById("music").play();
+  typeWriter();
+  confetti();
+}
+
+function typeWriter() {
+  if (i < msg.length) {
+    document.getElementById("text").innerHTML += msg.charAt(i);
+    i++;
+    setTimeout(typeWriter, 35);
+  } else {
+    document.getElementById("secretBox").classList.remove("hidden");
+  }
+}
+
+function checkPassword() {
+  let val = document.getElementById("password").value.toLowerCase().replace(/\s/g,'');
+
+  if (val.includes("20") && val.includes("maret") && val.includes("2024")) {
+    document.getElementById("secretMessage").classList.remove("hidden");
+  } else {
+    alert("Masih belum tepat... coba inget lagi 👀");
+  }
+}
+
+function confetti() {
+  for (let i = 0; i < 35; i++) {
+    let c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background = `hsl(${Math.random()*360},100%,75%)`;
+    c.style.animationDuration = (Math.random()*3+3)+"s";
+    document.body.appendChild(c);
+  }
+}
+</script>
+
+</body>
+</html>
