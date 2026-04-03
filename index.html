@@ -563,7 +563,7 @@
     // Secret message validation
     function verifySecret() {
         const input = document.getElementById('secretInput').value.toLowerCase();
-        if (input.includes('20') && input.includes('maret') && input.includes('2024')) {
+        if (input.includes('20') && input.includes('maret') && input.includes('2024') && input.includes('04') && input.includes('dua ribu dua empat')) {
             playUnlockImpact();
             const secretDiv = document.getElementById('secretReveal');
             secretDiv.classList.remove('hidden');
