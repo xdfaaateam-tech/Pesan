@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Untuk Radhiyatul Laila Husni</title>
+    <title>Sinematik Ulang Tahun | Untuk Pelangiii</title>
     <style>
         * {
             margin: 0;
@@ -563,7 +563,7 @@
     // Secret message validation
     function verifySecret() {
         const input = document.getElementById('secretInput').value.toLowerCase();
-        if (input.includes('20') && input.includes('maret') && input.includes('2024')){
+        if (input.includes('20') && input.includes('maret') && input.includes('2024')) {
             playUnlockImpact();
             const secretDiv = document.getElementById('secretReveal');
             secretDiv.classList.remove('hidden');
@@ -579,7 +579,7 @@
             playClickSound();
             const secretDiv = document.getElementById('secretReveal');
             secretDiv.classList.remove('hidden');
-            secretDiv.innerHTML = "❌ Jawaban kurang tepat, coba ingat kapan kita berkenalan? tanggal? bulan? tahun? tulis semuanya disitu... 💭\n(Hint: masa ga inget? )";
+            secretDiv.innerHTML = "❌ Jawaban kurang tepat, coba ingat momen manis itu... 💭\n(Hint: mengandung angka 20, bulan Maret, dan tahun 2024)";
             setTimeout(() => { if(secretDiv) secretDiv.classList.add('hidden'); }, 2500);
         }
     }
