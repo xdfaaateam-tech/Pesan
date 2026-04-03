@@ -1,286 +1,797 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Radhiyatul Laila Husni🌈</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Untuk Radhiyatul Laila Husni</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+            background: radial-gradient(circle at 20% 30%, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd);
+            background-attachment: fixed;
+        }
 
-body{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  color:white;
-  background:linear-gradient(135deg,#ff758c,#6a82fb);
-  background-size:300% 300%;
-  animation:bg 12s ease infinite;
-}
+        /* Global screen wrapper */
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0s;
+            z-index: 10;
+        }
 
-@keyframes bg{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
 
-.card{
-  width:90%;
-  max-width:420px;
-  padding:30px;
-  border-radius:25px;
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(20px);
-  box-shadow:0 20px 60px rgba(0,0,0,0.3);
-  text-align:center;
-}
+        /* Opening cinematic black layer */
+        #openingScreen {
+            background: #000000;
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-align: center;
+        }
 
-.hidden{display:none}
+        .cinematic-text {
+            opacity: 0;
+            transform: scale(0.96);
+            transition: opacity 1.2s ease, transform 0.8s ease;
+            font-weight: 400;
+            text-shadow: 0 0 20px rgba(255,255,200,0.6);
+        }
 
-/* CINEMATIC OVERLAY */
-#cinematic{
-  position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.5em;
-  letter-spacing:2px;
-  z-index:10;
-  opacity:1;
-  transition:1.5s;
-}
+        /* Locked state glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255,255,255,0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 550px;
+        }
 
-/* COUNTDOWN */
-.time-box{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin-top:15px;
-}
+        .countdown-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
 
-.time{
-  background:rgba(255,255,255,0.15);
-  padding:10px;
-  border-radius:12px;
-}
+        .time-unit {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            border-radius: 32px;
+            padding: 0.8rem 1.2rem;
+            min-width: 90px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
 
-.time span{
-  font-size:1.5em;
-  font-weight:bold;
-}
+        .time-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff9e0;
+            text-shadow: 0 0 12px #ffb6c1;
+            animation: softGlow 2s infinite alternate;
+            letter-spacing: 2px;
+        }
 
-/* CONTENT */
-.name{
-  margin:10px 0;
-  font-size:1.5em;
-  text-shadow:0 0 10px pink;
-}
+        .time-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff0e0;
+        }
 
-#text{
-  min-height:100px;
-  line-height:1.6em;
-  font-size:0.95em;
-}
+        @keyframes softGlow {
+            0% { text-shadow: 0 0 2px #ffb6c1; transform: scale(1);}
+            100% { text-shadow: 0 0 18px #ff80ab; transform: scale(1.02);}
+        }
 
-button{
-  margin-top:10px;
-  padding:10px 20px;
-  border-radius:25px;
-  border:none;
-  background:white;
-  color:#333;
-  font-weight:bold;
-  cursor:pointer;
-}
+        .breathing {
+            animation: breathe 2.2s ease-in-out infinite;
+        }
 
-input{
-  margin-top:10px;
-  padding:8px;
-  width:80%;
-  border:none;
-  border-bottom:2px solid white;
-  background:transparent;
-  color:white;
-  text-align:center;
-}
+        @keyframes breathe {
+            0% { transform: scale(1);}
+            50% { transform: scale(1.02);}
+            100% { transform: scale(1);}
+        }
 
-.small{font-size:0.7em;opacity:0.7;}
+        /* Story Mode Styles - Enhanced */
+        .story-card {
+            background: rgba(20, 20, 40, 0.5);
+            backdrop-filter: blur(28px);
+            border-radius: 64px;
+            padding: 2.8rem;
+            width: 88%;
+            max-width: 750px;
+            text-align: center;
+            border: 1px solid rgba(255,255,240,0.5);
+            box-shadow: 0 35px 60px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+        }
 
-.confetti{
-  position:absolute;
-  width:5px;
-  height:5px;
-  top:-10px;
-  animation:fall linear infinite;
-}
+        .story-text {
+            font-size: 1.45rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: #fff8f0;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+            margin: 1rem 0;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 0.5rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: 'Poppins', 'Segoe UI', system-ui;
+        }
 
-@keyframes fall{
-  to{transform:translateY(100vh) rotate(360deg);}
-}
-</style>
+        /* Special birthday name styling - professional & elegant */
+        .birthday-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFE6B0, #FFB347, #FF6B6B, #C084FC);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: goldenShine 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px rgba(255,215,0,0.4);
+            letter-spacing: -0.5px;
+        }
+
+        @keyframes goldenShine {
+            0% { filter: drop-shadow(0 0 4px #ffb347); opacity: 0.95; background-position: 0% 50%;}
+            100% { filter: drop-shadow(0 0 18px #ffaa44); opacity: 1; background-position: 100% 50%;}
+        }
+
+        .floating-stars {
+            display: inline-block;
+            animation: floatStar 3s ease-in-out infinite;
+        }
+
+        @keyframes floatStar {
+            0%, 100% { transform: translateY(0px) rotate(0deg);}
+            50% { transform: translateY(-5px) rotate(5deg);}
+        }
+
+        .btn-lanjut {
+            background: rgba(255,255,245,0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            margin-top: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-lanjut:hover {
+            transform: scale(1.05);
+            background: rgba(255,215,180,0.4);
+            box-shadow: 0 0 18px rgba(255,200,150,0.6);
+        }
+
+        .btn-lanjut:active {
+            transform: scale(0.97);
+        }
+
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.6s;
+        }
+        .ripple:active:after {
+            transform: scale(0);
+            opacity: 0.4;
+            transition: 0s;
+        }
+
+        /* password section */
+        .password-box {
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(24px);
+            border-radius: 56px;
+            padding: 2rem;
+            text-align: center;
+            width: 90%;
+            max-width: 520px;
+            border: 1px solid rgba(255,255,200,0.3);
+        }
+        .password-input {
+            width: 80%;
+            padding: 14px 24px;
+            margin: 20px 0;
+            border-radius: 60px;
+            border: none;
+            background: rgba(255,255,245,0.95);
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            font-family: monospace;
+        }
+        .secret-message {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #fff3df;
+            background: rgba(0,0,0,0.65);
+            padding: 28px;
+            border-radius: 48px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            text-align: left;
+            max-height: 50vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        /* canvas fireworks */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2000;
+        }
+
+        .scene-transition {
+            animation: sceneEnter 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+        }
+
+        @keyframes sceneEnter {
+            0% { opacity: 0; transform: scale(0.96) translateY(18px); filter: blur(8px);}
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0);}
+        }
+
+        .zoom-effect {
+            animation: cameraZoom 0.45s ease-out;
+        }
+
+        @keyframes cameraZoom {
+            0% { transform: scale(1);}
+            50% { transform: scale(1.06);}
+            100% { transform: scale(1);}
+        }
+
+        @media (max-width: 550px) {
+            .story-text { font-size: 1.1rem; }
+            .time-number { font-size: 2rem; }
+            .time-unit { min-width: 65px; padding: 0.4rem 0.8rem; }
+            .story-card { padding: 1.8rem; width: 92%;}
+            .birthday-name { font-size: 1.8rem; }
+        }
+
+        .audio-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: white;
+            z-index: 3000;
+            pointer-events: none;
+            font-family: monospace;
+        }
+
+        /* Additional particle floating background */
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
 </head>
-
 <body>
-
-<!-- 🎬 CINEMATIC -->
-<div id="cinematic">Loading moment...</div>
-
-<!-- ❌ BLOCK -->
-<div id="blocked" class="card">
-  <h2>⏳ Tunggu ya...</h2>
-  <p>Momen ini belum waktunya 👀</p>
-
-  <div class="time-box">
-    <div class="time"><span id="d">0</span>H</div>
-    <div class="time"><span id="h">0</span>J</div>
-    <div class="time"><span id="m">0</span>M</div>
-    <div class="time"><span id="s">0</span>D</div>
-  </div>
+<div class="floating-bg" id="floatingBg"></div>
+<div id="openingScreen" class="screen">
+    <div class="cinematic-text" id="cinematicLine1">Something is prepared...</div>
+    <div class="cinematic-text" id="cinematicLine2" style="margin-top: 20px;">Just for you</div>
 </div>
 
-<!-- ✅ CONTENT -->
-<div id="content" class="card hidden">
-  <h1>Selamat Ulang Tahun 🎉</h1>
-  <div class="name">Lailaa 🌈</div>
-
-  <div id="text"></div>
-  <button onclick="start()">Mulai</button>
-
-  <div id="secretBox" class="hidden">
-    <p class="small">Clue: kapan kita kenal 👀</p>
-    <input id="password">
-    <br><br>
-    <button onclick="checkPassword()">Buka</button>
-  </div>
-
-  <div id="secretMessage" class="hidden">
-    <p style="margin-top:15px; line-height:1.6em;">
-      Terima kasih telah hadir dalam perjalanan hidup ini.<br><br>
-
-      Dari sekian banyak waktu yang berlalu,  
-      ada satu momen yang selalu memiliki tempat tersendiri—  
-      saat semuanya mulai terasa lebih berarti.<br><br>
-
-      Kamu mungkin tidak selalu menyadarinya,  
-      tetapi kehadiranmu membawa ketenangan dan warna tersendiri.<br><br>
-
-      Semoga di usia yang baru ini,  
-      langkahmu semakin ringan,  
-      harapanmu semakin dekat,  
-      dan kebahagiaan selalu menemukan jalannya kepadamu.
-    </p>
-  </div>
+<!-- LOCKED STATE (countdown) -->
+<div id="lockedScreen" class="screen">
+    <div class="glass-card breathing">
+        <div style="font-size: 2.5rem;">⏳</div>
+        <h2 style="color:white; margin: 0.5rem 0;">Tunggu ya...</h2>
+        <p style="color:#fff0e6; margin-bottom: 1.5rem;">akan terbuka pada waktunya</p>
+        <div class="countdown-container" id="countdownContainer">
+            <div class="time-unit"><div class="time-number" id="days">00</div><div class="time-label">Hari</div></div>
+            <div class="time-unit"><div class="time-number" id="hours">00</div><div class="time-label">Jam</div></div>
+            <div class="time-unit"><div class="time-number" id="minutes">00</div><div class="time-label">Menit</div></div>
+            <div class="time-unit"><div class="time-number" id="seconds">00</div><div class="time-label">Detik</div></div>
+        </div>
+    </div>
 </div>
 
-<audio id="music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
-</audio>
+<!-- STORY MODE CONTAINER -->
+<div id="storyScreen" class="screen hidden">
+    <div class="story-card" id="storyCard">
+        <div class="story-text" id="storyText"></div>
+        <button class="btn-lanjut ripple" id="nextSceneBtn">Lanjut ➤</button>
+    </div>
+</div>
+
+<!-- PASSWORD LOCK / SECRET AREA -->
+<div id="passwordScreen" class="screen hidden">
+    <div class="password-box">
+        <h3 style="color:white;">🔒 Pesan Tersegel</h3>
+        <p style="color:#ffdfb3;">"kapan kita kenal 👀"</p>
+        <input type="text" id="secretInput" class="password-input" placeholder="Tulis jawabanmu...">
+        <button id="verifyBtn" class="btn-lanjut" style="margin-top: 10px;">Buka Rahasia</button>
+        <div id="secretReveal" class="secret-message hidden"></div>
+    </div>
+</div>
+
+<canvas id="fireworksCanvas"></canvas>
+<div class="audio-hint" id="audioHint">🎵 ketuk layar untuk suara & musik</div>
 
 <script>
-const target=new Date("2026-04-04T00:00:00");
-
-// cinematic intro
-setTimeout(()=>{
-  document.getElementById("cinematic").style.opacity=0;
-  setTimeout(()=>{
-    document.getElementById("cinematic").style.display="none";
-  },1500);
-},2000);
-
-function update(){
-  const now=new Date();
-  const diff=target-now;
-
-  if(diff<=0){
-    document.getElementById("blocked").style.display="none";
-    document.getElementById("content").classList.remove("hidden");
-
-    // cinematic reveal
-    document.body.style.filter="blur(10px)";
-    setTimeout(()=>{
-      document.body.style.filter="blur(0)";
-    },800);
-
-    return;
-  }
-
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff/(1000*60*60))%24);
-  const m=Math.floor((diff/(1000*60))%60);
-  const s=Math.floor((diff/1000)%60);
-
-  dEl.innerText=d;
-  hEl.innerText=h;
-  mEl.innerText=m;
-  sEl.innerText=s;
-}
-
-const dEl=document.getElementById("d");
-const hEl=document.getElementById("h");
-const mEl=document.getElementById("m");
-const sEl=document.getElementById("s");
-
-setInterval(update,1000);
-update();
-
-// TEXT (lebih profesional)
-const msg=`halooo pelangiiiii 🌈
-
-Hari ini bukan sekadar penanda bertambahnya usia,
-melainkan pengingat akan semua perjalanan yang telah kamu lalui.
-
-Semoga setiap langkah ke depan membawa kebaikan,
-setiap usaha menemukan hasil terbaik,
-dan setiap harapan perlahan menjadi kenyataan.
-
-Tetaplah menjadi dirimu yang apa adanya,
-karena di situlah letak hal-hal baik bermula. ✨`;
-
-let i=0;
-
-function start(){
-  document.getElementById("music").play();
-  type();
-  confetti();
-}
-
-function type(){
-  if(i<msg.length){
-    document.getElementById("text").innerHTML+=msg.charAt(i);
-    i++;
-    setTimeout(type,30);
-  }else{
-    document.getElementById("secretBox").classList.remove("hidden");
-  }
-}
-
-function checkPassword(){
-  let val=document.getElementById("password").value.toLowerCase().replace(/\s/g,'');
-
-  if(val.includes("20")&&val.includes("maret")&&val.includes("2024")){
-    document.getElementById("secretMessage").classList.remove("hidden");
-  }else{
-    alert("Masih belum tepat... coba ingat lagi 👀");
-  }
-}
-
-function confetti(){
-  for(let i=0;i<30;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=`hsl(${Math.random()*360},100%,75%)`;
-    c.style.animationDuration=(Math.random()*3+3)+"s";
-    document.body.appendChild(c);
-  }
-}
+    // ------------------- AUDIO & SOUND SYSTEM ------------------
+    let audioCtx = null;
+    let isAudioAllowed = false;
+    let currentMusicInterval = null;
+    let musicPlaying = false;
+    
+    const tracks = [
+        { name: "dreamy", notes: [261.63, 329.63, 392.00, 523.25], bpm: 100 },
+        { name: "gentle", notes: [293.66, 369.99, 440.00, 587.33], bpm: 85 },
+        { name: "uplift", notes: [329.63, 392.00, 493.88, 587.33], bpm: 110 }
+    ];
+    
+    function initAudio() {
+        if (audioCtx) return;
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    function playClickSound() {
+        if (!isAudioAllowed || !audioCtx) return;
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.value = 880;
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.25);
+        osc.start();
+        osc.stop(now + 0.25);
+    }
+    
+    function playWhoosh() {
+        if (!isAudioAllowed || !audioCtx) return;
+        const now = audioCtx.currentTime;
+        const noise = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        noise.type = "sawtooth";
+        noise.connect(gain);
+        gain.connect(audioCtx.destination);
+        noise.frequency.value = 300;
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+        noise.frequency.exponentialRampToValueAtTime(80, now + 0.4);
+        noise.start();
+        noise.stop(now + 0.45);
+    }
+    
+    function playUnlockImpact() {
+        if (!isAudioAllowed || !audioCtx) return;
+        const now = audioCtx.currentTime;
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc1.frequency.value = 523.25;
+        osc2.frequency.value = 659.25;
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+        osc1.start();
+        osc2.start();
+        osc1.stop(now + 0.7);
+        osc2.stop(now + 0.7);
+    }
+    
+    function stopBackgroundMusic() {
+        if (currentMusicInterval) {
+            clearInterval(currentMusicInterval);
+            currentMusicInterval = null;
+        }
+        musicPlaying = false;
+    }
+    
+    function startBackgroundMusic(trackIndex) {
+        if (!isAudioAllowed || !audioCtx) return;
+        stopBackgroundMusic();
+        const track = tracks[trackIndex % tracks.length];
+        if (!track) return;
+        musicPlaying = true;
+        let step = 0;
+        const intervalTime = (60 / track.bpm) * 0.5 * 1000;
+        const playNote = () => {
+            if (!musicPlaying || !isAudioAllowed || !audioCtx) return;
+            const now = audioCtx.currentTime;
+            const note = track.notes[step % track.notes.length];
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            osc.frequency.value = note;
+            gainNode.gain.setValueAtTime(0.07, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+            osc.start();
+            osc.stop(now + 0.4);
+            step++;
+        };
+        playNote();
+        currentMusicInterval = setInterval(() => {
+            if (musicPlaying && isAudioAllowed) playNote();
+            else if (!musicPlaying) clearInterval(currentMusicInterval);
+        }, intervalTime);
+    }
+    
+    // ========== STORY SCENES ==========
+    // Scene 0: Pesan pembuka yang mendalam
+    // Scene 1: Ucapan ulang tahun profesional & bermakna untuk "pelangiii"
+    const storyScenes = [
+        "halooo pelangiiiii 🌈\n\nHari ini bukan sekadar penanda bertambahnya usia,\nmengingatkan akan semua perjalanan yang telah kamu lalui.\n\nSemoga setiap langkah ke depan membawa kebaikan,\nsetiap usaha menemukan hasil terbaik,\ndan setiap harapan perlahan menjadi kenyataan.\n\nTetaplah menjadi dirimu yang apa adanya,\nkarena di situlah letak hal-hal baik bermula. ✨",
+        
+        // UCAPAN ULANG TAHUN PROFESIONAL & BERMAKNA
+        "✨ 𝐇𝐀𝐏𝐏𝐘 𝐁𝐈𝐑𝐓𝐇𝐃𝐀𝐘, 𝐏𝐄𝐋𝐀𝐍𝐆𝐈𝐈𝐈 ✨\n\n<span class='birthday-name'>🌟 Pelangiii 🌟</span>\n\nSetiap detik yang berlalu membentukmu menjadi versi terbaik dari dirimu sendiri. tetap jadi diri kamuu sendiriii yaaa?, semogaaa apa yang kamu inginkan semuanya terwujud dan apapun yang kamu impikan semuanyaa terjadi , semangattt yaaaaa.\n\n🎂 Selamat ulang tahunn pelangiiii. 🎂\n\n<span class='floating-stars'>✨💫✨</span>"
+    ];
+    
+    let currentSceneIndex = 0;
+    let storyActive = false;
+    let unlockTriggered = false;
+    
+    // target next April 4, 00:00
+    function getNextApril4() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const target = new Date(year, 3, 4, 0, 0, 0);
+        if (now > target) target.setFullYear(year + 1);
+        return target;
+    }
+    
+    let countdownInterval = null;
+    
+    function updateCountdown() {
+        const now = new Date();
+        const target = getNextApril4();
+        const diff = target - now;
+        if (diff <= 0) {
+            if (!unlockTriggered && isUnlockTime()) triggerUnlock();
+            if (countdownInterval) clearInterval(countdownInterval);
+            return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (86400000)) / (3600000));
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+        document.getElementById('days').innerText = String(days).padStart(2,'0');
+        document.getElementById('hours').innerText = String(hours).padStart(2,'0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2,'0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2,'0');
+    }
+    
+    function isUnlockTime() {
+        const now = new Date();
+        return now.getMonth() === 3 && now.getDate() === 4;
+    }
+    
+    function triggerUnlock() {
+        if (unlockTriggered) return;
+        unlockTriggered = true;
+        if (countdownInterval) clearInterval(countdownInterval);
+        playUnlockImpact();
+        document.getElementById('lockedScreen').classList.add('hidden');
+        startStoryMode();
+    }
+    
+    function startStoryMode() {
+        currentSceneIndex = 0;
+        storyActive = true;
+        document.getElementById('storyScreen').classList.remove('hidden');
+        showScene(currentSceneIndex);
+        document.getElementById('storyCard').classList.add('scene-transition');
+        setTimeout(() => document.getElementById('storyCard').classList.remove('scene-transition'), 800);
+    }
+    
+    function showScene(index) {
+        const storyTextDiv = document.getElementById('storyText');
+        let rawText = storyScenes[index];
+        if (index === 1) {
+            storyTextDiv.innerHTML = rawText;
+            // tambahan efek glitter
+        } else {
+            storyTextDiv.innerText = rawText;
+        }
+        storyTextDiv.style.animation = 'none';
+        storyTextDiv.offsetHeight;
+        storyTextDiv.style.animation = 'sceneEnter 0.5s ease forwards';
+        if (isAudioAllowed) startBackgroundMusic(index === 1 ? 2 : 0);
+    }
+    
+    function transitionToNextScene() {
+        if (!storyActive) return;
+        const card = document.getElementById('storyCard');
+        card.style.transform = 'scale(1.02)';
+        setTimeout(() => { if(card) card.style.transform = ''; }, 250);
+        playWhoosh();
+        playClickSound();
+        if (currentSceneIndex + 1 < storyScenes.length) {
+            currentSceneIndex++;
+            showScene(currentSceneIndex);
+            card.classList.add('zoom-effect');
+            setTimeout(() => card.classList.remove('zoom-effect'), 400);
+        } else if (currentSceneIndex + 1 === storyScenes.length) {
+            currentSceneIndex++;
+            showPasswordScreen();
+        }
+    }
+    
+    function showPasswordScreen() {
+        storyActive = false;
+        stopBackgroundMusic();
+        document.getElementById('storyScreen').classList.add('hidden');
+        const pwdScreen = document.getElementById('passwordScreen');
+        pwdScreen.classList.remove('hidden');
+        pwdScreen.style.opacity = '0';
+        setTimeout(() => pwdScreen.style.opacity = '1', 20);
+        pwdScreen.style.transition = 'opacity 0.8s';
+        pwdScreen.style.opacity = '1';
+    }
+    
+    // ========== FIREWORKS SYSTEM (Enhanced) ==========
+    let fireworksActive = false;
+    let particles = [];
+    let canvas = document.getElementById('fireworksCanvas');
+    let ctx = canvas.getContext('2d');
+    let animationId = null;
+    
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    
+    class Particle {
+        constructor(x, y, vx, vy, color, life) {
+            this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+            this.color = color; this.life = life; this.maxLife = life;
+            this.size = 4 + Math.random() * 6;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.vy += 0.12;
+            this.life -= 2.2;
+            return this.life > 0;
+        }
+        draw() {
+            ctx.globalAlpha = Math.min(1, this.life / this.maxLife);
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * (this.life/this.maxLife), 0, Math.PI*2);
+            ctx.fill();
+        }
+    }
+    
+    function spawnFireworks() {
+        if (!fireworksActive) return;
+        const centerX = canvas.width/2;
+        const centerY = canvas.height/2;
+        const color = `hsl(${Math.random() * 360}, 100%, 65%)`;
+        for (let i=0; i<70; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 8;
+            const vx = Math.cos(angle) * speed;
+            const vy = Math.sin(angle) * speed;
+            particles.push(new Particle(centerX, centerY, vx, vy, color, 110 + Math.random() * 60));
+        }
+    }
+    
+    function animateFireworks() {
+        if (!fireworksActive) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let anyAlive = false;
+        for (let i=0; i<particles.length; i++) {
+            const alive = particles[i].update();
+            particles[i].draw();
+            if (alive) anyAlive = true;
+            else particles.splice(i,1), i--;
+        }
+        if (anyAlive || particles.length > 0) {
+            animationId = requestAnimationFrame(animateFireworks);
+        } else {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    }
+    
+    function startFireworks(duration = 5500) {
+        if (fireworksActive) return;
+        fireworksActive = true;
+        resizeCanvas();
+        particles = [];
+        const interval = setInterval(() => {
+            if (!fireworksActive) clearInterval(interval);
+            else spawnFireworks();
+        }, 250);
+        animateFireworks();
+        setTimeout(() => {
+            fireworksActive = false;
+            clearInterval(interval);
+            if (animationId) cancelAnimationFrame(animationId);
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles = [];
+        }, duration);
+    }
+    
+    // Secret message validation
+    function verifySecret() {
+        const input = document.getElementById('secretInput').value.toLowerCase();
+        if (input.includes('20') && input.includes('maret') && input.includes('2024')) {
+            playUnlockImpact();
+            const secretDiv = document.getElementById('secretReveal');
+            secretDiv.classList.remove('hidden');
+            secretDiv.innerHTML = `✨🌸 𝐏𝐄𝐒𝐀𝐍 𝐑𝐀𝐇𝐀𝐒𝐈𝐀 𝐔𝐍𝐓𝐔𝐊 𝐏𝐄𝐋𝐀𝐍𝐆𝐈𝐈𝐈 🌸✨\n\nTerima kasih telah hadir dalam perjalanan hidup ini.\n\nDari sekian banyak waktu yang berlalu,\nada satu momen yang selalu memiliki tempat tersendiri—\nsaat semuanya mulai terasa lebih berarti.\n\nKamu mungkin tidak selalu menyadarinya,\ntetapi kehadiranmu membawa ketenangan dan warna tersendiri.\n\nSemoga di usia yang baru ini,\nlangkahmu semakin ringan,\nharapanmu semakin dekat,\ndan kebahagiaan selalu menemukan jalannya kepadamu. 💫🎂\n\n✨ 𝐒𝐄𝐋𝐀𝐌𝐀𝐓 𝐔𝐋𝐀𝐍𝐆 𝐓𝐀𝐇𝐔𝐍, 𝐏𝐄𝐋𝐀𝐍𝐆𝐈𝐈𝐈! ✨\n\nTeruslah bersinar seperti bintang yang tak pernah padam.`;
+            
+            const mainBody = document.body;
+            mainBody.style.transition = 'transform 0.7s cubic-bezier(0.2,0.9,0.4,1.2)';
+            mainBody.style.transform = 'scale(1.03)';
+            setTimeout(() => mainBody.style.transform = 'scale(1)', 800);
+            startFireworks(6000);
+            document.getElementById('verifyBtn').disabled = true;
+        } else {
+            playClickSound();
+            const secretDiv = document.getElementById('secretReveal');
+            secretDiv.classList.remove('hidden');
+            secretDiv.innerHTML = "❌ Jawaban kurang tepat, coba ingat momen manis itu... 💭\n(Hint: mengandung angka 20, bulan Maret, dan tahun 2024)";
+            setTimeout(() => { if(secretDiv) secretDiv.classList.add('hidden'); }, 2500);
+        }
+    }
+    
+    // ---- OPENING CINEMATIC ----
+    function runOpening() {
+        const line1 = document.getElementById('cinematicLine1');
+        const line2 = document.getElementById('cinematicLine2');
+        line1.style.opacity = '0';
+        line2.style.opacity = '0';
+        setTimeout(() => { line1.style.opacity = '1'; line1.style.transform = 'scale(1)'; }, 300);
+        setTimeout(() => { line2.style.opacity = '1'; line2.style.transform = 'scale(1)'; }, 1800);
+        setTimeout(() => {
+            const openingDiv = document.getElementById('openingScreen');
+            openingDiv.style.opacity = '0';
+            setTimeout(() => {
+                openingDiv.classList.add('hidden');
+                if (isUnlockTime()) {
+                    triggerUnlock();
+                } else {
+                    document.getElementById('lockedScreen').classList.remove('hidden');
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    countdownInterval = setInterval(updateCountdown, 1000);
+                    updateCountdown();
+                }
+            }, 1000);
+        }, 3200);
+    }
+    
+    function enableAudioAndMusic() {
+        if (isAudioAllowed) return;
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume().then(() => {
+                isAudioAllowed = true;
+                document.getElementById('audioHint').style.opacity = '0';
+                if (storyActive && !document.getElementById('passwordScreen').classList.contains('hidden') === false && document.getElementById('storyScreen').classList.contains('hidden') === false) {
+                    startBackgroundMusic(currentSceneIndex === 1 ? 2 : 0);
+                }
+            });
+        } else {
+            isAudioAllowed = true;
+        }
+    }
+    
+    document.body.addEventListener('click', (e) => {
+        if (!isAudioAllowed && (e.target.closest('.btn-lanjut, #verifyBtn'))) {
+            enableAudioAndMusic();
+            playClickSound();
+        } else if (!isAudioAllowed) {
+            enableAudioAndMusic();
+        } else {
+            if (e.target.closest('.btn-lanjut')) playClickSound();
+        }
+    });
+    
+    document.getElementById('nextSceneBtn').addEventListener('click', () => {
+        if (!isAudioAllowed) enableAudioAndMusic();
+        if (storyActive) transitionToNextScene();
+    });
+    document.getElementById('verifyBtn').addEventListener('click', () => {
+        if (!isAudioAllowed) enableAudioAndMusic();
+        verifySecret();
+    });
+    
+    window.addEventListener('load', () => {
+        resizeCanvas();
+        runOpening();
+        setInterval(() => {
+            if (!unlockTriggered && isUnlockTime()) triggerUnlock();
+        }, 1000);
+        // floating bg particles (soft)
+        const floatingDiv = document.getElementById('floatingBg');
+        for(let i=0;i<40;i++) {
+            let star = document.createElement('div');
+            star.style.position = 'absolute';
+            star.style.width = '2px';
+            star.style.height = '2px';
+            star.style.background = 'rgba(255,255,200,0.5)';
+            star.style.borderRadius = '50%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animation = `floatStar ${5+Math.random()*5}s infinite linear`;
+            floatingDiv.appendChild(star);
+        }
+    });
+    
+    const btns = document.querySelectorAll('.btn-lanjut, #verifyBtn');
+    btns.forEach(btn => btn.classList.add('ripple'));
 </script>
-
 </body>
 </html>
