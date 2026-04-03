@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Radhiyatul Laila Husni 🌈</title>
+<title>Untuk Radhiyatul Laila Husni🌈</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
@@ -15,33 +15,15 @@ body{
   justify-content:center;
   overflow:hidden;
   color:white;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3,#6a82fb);
+  background:linear-gradient(135deg,#ff758c,#6a82fb);
   background-size:300% 300%;
-  animation:bgMove 12s ease infinite;
+  animation:bg 12s ease infinite;
 }
 
-@keyframes bgMove{
+@keyframes bg{
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
-}
-
-/* glowing background orb */
-body::before{
-  content:"";
-  position:absolute;
-  width:350px;
-  height:350px;
-  background:rgba(255,255,255,0.2);
-  filter:blur(120px);
-  top:20%;
-  left:30%;
-  animation:float 8s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(50px);}
 }
 
 .card{
@@ -53,27 +35,32 @@ body::before{
   backdrop-filter:blur(20px);
   box-shadow:0 20px 60px rgba(0,0,0,0.3);
   text-align:center;
-  animation:fadeUp 1s ease;
 }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px);}
-  to{opacity:1;transform:translateY(0);}
+.hidden{display:none}
+
+/* CINEMATIC OVERLAY */
+#cinematic{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.5em;
+  letter-spacing:2px;
+  z-index:10;
+  opacity:1;
+  transition:1.5s;
 }
 
-.hidden{display:none;}
-
-/* COUNTDOWN STYLE */
-#countdown{
-  margin-top:15px;
-  font-size:1.3em;
-  letter-spacing:1px;
-}
-
+/* COUNTDOWN */
 .time-box{
   display:flex;
-  justify-content:center;
   gap:10px;
+  justify-content:center;
   margin-top:15px;
 }
 
@@ -81,31 +68,28 @@ body::before{
   background:rgba(255,255,255,0.15);
   padding:10px;
   border-radius:12px;
-  min-width:60px;
 }
 
 .time span{
-  display:block;
   font-size:1.5em;
   font-weight:bold;
-  text-shadow:0 0 10px white;
 }
 
 /* CONTENT */
 .name{
   margin:10px 0;
   font-size:1.5em;
-  text-shadow:0 0 12px pink;
+  text-shadow:0 0 10px pink;
 }
 
 #text{
-  min-height:85px;
-  font-size:0.95em;
+  min-height:100px;
   line-height:1.6em;
-  margin-bottom:18px;
+  font-size:0.95em;
 }
 
 button{
+  margin-top:10px;
   padding:10px 20px;
   border-radius:25px;
   border:none;
@@ -133,7 +117,6 @@ input{
   width:5px;
   height:5px;
   top:-10px;
-  opacity:0.6;
   animation:fall linear infinite;
 }
 
@@ -145,58 +128,70 @@ input{
 
 <body>
 
-<!-- ❌ BLOCKED -->
+<!-- 🎬 CINEMATIC -->
+<div id="cinematic">Loading moment...</div>
+
+<!-- ❌ BLOCK -->
 <div id="blocked" class="card">
   <h2>⏳ Tunggu ya...</h2>
-  <p>Kejutan ini belum waktunya dibuka 👀</p>
+  <p>Momen ini belum waktunya 👀</p>
 
   <div class="time-box">
-    <div class="time"><span id="d">0</span>Hari</div>
-    <div class="time"><span id="h">0</span>Jam</div>
-    <div class="time"><span id="m">0</span>Menit</div>
-    <div class="time"><span id="s">0</span>Detik</div>
+    <div class="time"><span id="d">0</span>H</div>
+    <div class="time"><span id="h">0</span>J</div>
+    <div class="time"><span id="m">0</span>M</div>
+    <div class="time"><span id="s">0</span>D</div>
   </div>
 </div>
 
 <!-- ✅ CONTENT -->
 <div id="content" class="card hidden">
   <h1>Selamat Ulang Tahun 🎉</h1>
-  <div class="name">Pelangiiii 🌈</div>
+  <div class="name">Lailaa 🌈</div>
 
   <div id="text"></div>
   <button onclick="start()">Mulai</button>
 
   <div id="secretBox" class="hidden">
     <p class="small">Clue: kapan kita kenal 👀</p>
-    <input id="password" placeholder="ingat baik-baik...">
+    <input id="password">
     <br><br>
     <button onclick="checkPassword()">Buka</button>
   </div>
 
   <div id="secretMessage" class="hidden">
     <p style="margin-top:15px; line-height:1.6em;">
-      Makasih ya sudah hadir di hidup ini 🌈<br><br>
-      Dari sekian banyak hari yang lewat,  
-      ada satu hari yang selalu keinget…  
-      hari dimana semuanya mulai terasa berbeda.<br><br>
+      Terima kasih telah hadir dalam perjalanan hidup ini.<br><br>
 
-      Kamu itu sederhana, tapi berarti.  
-      Gak selalu harus sempurna,  
-      tapi selalu cukup untuk bikin hari jadi lebih baik.<br><br>
+      Dari sekian banyak waktu yang berlalu,  
+      ada satu momen yang selalu memiliki tempat tersendiri—  
+      saat semuanya mulai terasa lebih berarti.<br><br>
 
-      Semoga di umur kamu sekarang,  
-      hal-hal baik makin deket ke kamu,  
-      dan hal-hal berat pelan-pelan menjauh 💖
+      Kamu mungkin tidak selalu menyadarinya,  
+      tetapi kehadiranmu membawa ketenangan dan warna tersendiri.<br><br>
+
+      Semoga di usia yang baru ini,  
+      langkahmu semakin ringan,  
+      harapanmu semakin dekat,  
+      dan kebahagiaan selalu menemukan jalannya kepadamu.
     </p>
   </div>
 </div>
 
 <audio id="music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-sweet.mp3">
+  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
 </audio>
 
 <script>
 const target=new Date("2026-04-04T00:00:00");
+
+// cinematic intro
+setTimeout(()=>{
+  document.getElementById("cinematic").style.opacity=0;
+  setTimeout(()=>{
+    document.getElementById("cinematic").style.display="none";
+  },1500);
+},2000);
 
 function update(){
   const now=new Date();
@@ -205,6 +200,13 @@ function update(){
   if(diff<=0){
     document.getElementById("blocked").style.display="none";
     document.getElementById("content").classList.remove("hidden");
+
+    // cinematic reveal
+    document.body.style.filter="blur(10px)";
+    setTimeout(()=>{
+      document.body.style.filter="blur(0)";
+    },800);
+
     return;
   }
 
@@ -213,26 +215,32 @@ function update(){
   const m=Math.floor((diff/(1000*60))%60);
   const s=Math.floor((diff/1000)%60);
 
-  document.getElementById("d").innerText=d;
-  document.getElementById("h").innerText=h;
-  document.getElementById("m").innerText=m;
-  document.getElementById("s").innerText=s;
+  dEl.innerText=d;
+  hEl.innerText=h;
+  mEl.innerText=m;
+  sEl.innerText=s;
 }
+
+const dEl=document.getElementById("d");
+const hEl=document.getElementById("h");
+const mEl=document.getElementById("m");
+const sEl=document.getElementById("s");
 
 setInterval(update,1000);
 update();
 
-// TEXT
-const msg=`halooo pelangiiii 🌈
+// TEXT (lebih profesional)
+const msg=`halooo pelangiiiii 🌈
 
-Hari ini bukan cuma tentang bertambahnya umur,
-tapi tentang semua hal baik yang sudah kamu lewati.
+Hari ini bukan sekadar penanda bertambahnya usia,
+melainkan pengingat akan semua perjalanan yang telah kamu lalui.
 
-Semoga hari kamu ringan,
-senyummu lebih sering,
-dan langkahmu selalu ditemani hal-hal baik.
+Semoga setiap langkah ke depan membawa kebaikan,
+setiap usaha menemukan hasil terbaik,
+dan setiap harapan perlahan menjadi kenyataan.
 
-Stay being you, ya ✨`;
+Tetaplah menjadi dirimu yang apa adanya,
+karena di situlah letak hal-hal baik bermula. ✨`;
 
 let i=0;
 
@@ -246,7 +254,7 @@ function type(){
   if(i<msg.length){
     document.getElementById("text").innerHTML+=msg.charAt(i);
     i++;
-    setTimeout(type,35);
+    setTimeout(type,30);
   }else{
     document.getElementById("secretBox").classList.remove("hidden");
   }
@@ -258,12 +266,12 @@ function checkPassword(){
   if(val.includes("20")&&val.includes("maret")&&val.includes("2024")){
     document.getElementById("secretMessage").classList.remove("hidden");
   }else{
-    alert("Masih belum tepat... coba inget lagi 👀");
+    alert("Masih belum tepat... coba ingat lagi 👀");
   }
 }
 
 function confetti(){
-  for(let i=0;i<40;i++){
+  for(let i=0;i<30;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
